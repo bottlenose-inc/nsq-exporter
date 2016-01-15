@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM docker.bottlenose.com/service/alpine-base
 
 EXPOSE 9117
 
