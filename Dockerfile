@@ -9,4 +9,4 @@ RUN apk add --update -t build-deps go git mercurial libc-dev gcc libgcc \
     && cd $APPPATH && go get -d && go build -o /nsq_exporter \
     && apk del --purge build-deps && rm -rf $GOPATH
 
-ENTRYPOINT ["/nsq_exporter"]
+ENTRYPOINT ["/nsq-exporter"]
