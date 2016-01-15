@@ -1,4 +1,4 @@
-FROM docker.bottlenose.com/service/alpine-base
+FROM docker.bottlenose.com/image/alpine-base
 
 EXPOSE 9117
 
