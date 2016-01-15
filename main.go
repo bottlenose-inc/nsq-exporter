@@ -8,12 +8,12 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/lovoo/nsq_exporter/collector"
+	"github.com/bottlenose-inc/nsq-exporter/collector"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-// Version of nsq_exporter. Set at build time.
+// Version of nsq-exporter. Set at build time.
 const Version = "0.0.0.dev"
 
 var (
