@@ -1,9 +1,14 @@
 package collector
 
 import (
+	"log"
 	"strconv"
 
 	"github.com/prometheus/client_golang/prometheus"
+)
+
+var (
+	allTopics []string
 )
 
 type topicStats []struct {
@@ -53,7 +58,24 @@ func TopicStats(namespace string) StatsCollector {
 }
 
 func (ts topicStats) collect(s *stats, out chan<- prometheus.Metric) {
+	// Exit if any "dead" topics are detected
+	for _, topicName := range allTopics {
+		found := false
+		for _, topic := range s.Topics {
+			if topicName == topic.Name {
+				found = true
+				break
+			}
+		}
+		if !found {
+			log.Fatal("At least one old topic no longer included in nsqd stats - exiting")
+		}
+	}
+
+	allTopics = nil // Rebuild list of all topics
 	for _, topic := range s.Topics {
+		allTopics = append(allTopics, topic.Name)
+
 		labels := prometheus.Labels{
 			"type":   "topic",
 			"topic":  topic.Name,
