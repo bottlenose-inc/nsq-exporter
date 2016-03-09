@@ -58,7 +58,7 @@ func TopicStats(namespace string) StatsCollector {
 }
 
 func (ts topicStats) collect(s *stats, out chan<- prometheus.Metric) {
-	// Exit if any "dead" topics are detected
+	// Exit if any "dead" topics are detected - Docker will restart the container
 	for _, topicName := range allTopics {
 		found := false
 		for _, topic := range s.Topics {
